@@ -144,6 +144,14 @@
             margin-top: 40px;
         }
 
+        /* --- Voice AI Widget Styling --- */
+        elevenlabs-convai {
+            position: fixed;
+            bottom: 90px; /* Position above the chat widget */
+            right: 20px;
+            z-index: 999;
+        }
+
     </style>
 </head>
 <body>
@@ -164,6 +172,7 @@
         <section class="hero">
             <h1>Your Smile, Our Passion</h1>
             <p>Providing exceptional dental care for the whole family in a friendly and modern environment.</p>
+            <a href="#" class="cta-button">Book an Appointment</a>
         </section>
 
         <section class="services container">
@@ -189,24 +198,28 @@
         <p>&copy; 2025 Brightside Dental Clinic. All Rights Reserved.</p>
     </footer>
 
-<!-- Chatbot widget -->
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    <!-- Voice AI Widget (ElevenLabs) -->
+    <elevenlabs-convai agent-id="agent_3101k6k4sbx9ecfr4drsww1aa4sy"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-	createChat({
-		webhookUrl: 'https://forgeai.app.n8n.cloud/webhook/d7408e68-b285-4320-bd98-540738dcc36e/chat',
-      mode: 'float', // floating button at bottom-right
-      theme: {
-        primaryColor: "#2563eb",
-        headerColor: "#1f2937",
-      },
-      initialMessages: [
-        "Hello! Brightside Bot here."
-      ],
-      showWelcomeScreen: false
-    });
-</script>
+    <!-- Text Chatbot widget (n8n) -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'https://forgeai.app.n8n.cloud/webhook/d7408e68-b285-4320-bd98-540738dcc36e/chat',
+            mode: 'float', // floating button at bottom-right
+            theme: {
+                primaryColor: "#2563eb",
+                headerColor: "#1f2937",
+            },
+            initialMessages: [
+                "Hello! Brightside Bot here. I can help you with text-based inquiries. For voice assistance, click the voice button!"
+            ],
+            showWelcomeScreen: false
+        });
+    </script>
     
 </body>
 </html>
