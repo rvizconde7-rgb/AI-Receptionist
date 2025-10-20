@@ -432,22 +432,71 @@
     </div>
   </div>
 
-  <div class="modal" id="modal-contact" aria-hidden="true">
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="ctc-title">
-      <div class="modal-head">
-        <h4 id="ctc-title">Send Us a Message</h4>
-        <button class="close" data-close>&times;</button>
-      </div>
-      <div class="modal-body">
-        <iframe
-          src="AIRTABLE_CONTACT_EMBED_URL_HERE"
-          title="Contact Form"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
+<!-- Contact Modal -->
+<div class="modal" id="modal-contact" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="ctc-title">
+    <div class="modal-head">
+      <h4 id="ctc-title">Send Us a Message</h4>
+      <button class="close" data-close>&times;</button>
+    </div>
+    <div class="modal-body" style="padding:20px">
+      <form id="contactForm">
+        <label for="ctc-name" style="font-weight:600;display:block;margin-bottom:6px;">Full Name</label>
+        <input id="ctc-name" name="name" placeholder="e.g. Sarah Johnson" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+
+        <label for="ctc-email" style="font-weight:600;display:block;margin-bottom:6px;">Email Address</label>
+        <input id="ctc-email" name="email" type="email" placeholder="your@email.com" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+
+        <label for="ctc-reason" style="font-weight:600;display:block;margin-bottom:6px;">Reason for Contact</label>
+        <select id="ctc-reason" name="reason" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+          <option value="">Select a reason</option>
+          <option>General Inquiry</option>
+          <option>Book Appointment</option>
+          <option>Billing / Insurance</option>
+          <option>Other</option>
+        </select>
+
+        <label for="ctc-msg" style="font-weight:600;display:block;margin-bottom:6px;">Message</label>
+        <textarea id="ctc-msg" name="message" rows="4" placeholder="How can we help?" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:20px;font-size:1rem;"></textarea>
+
+        <button type="submit" class="btn primary" style="width:100%;justify-content:center">Send Message</button>
+      </form>
     </div>
   </div>
+</div>
+
+<script>
+  const contactModal = document.getElementById('modal-contact');
+  const contactForm = document.getElementById('contactForm');
+
+  // Open and close modal
+  document.getElementById('open-contact').addEventListener('click', e=>{
+    e.preventDefault();
+    contactModal.classList.add('open');
+    contactModal.setAttribute('aria-hidden','false');
+  });
+  contactModal.addEventListener('click', e=>{ if(e.target===contactModal){ contactModal.classList.remove('open'); contactModal.setAttribute('aria-hidden','true'); }});
+  document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>{contactModal.classList.remove('open');contactModal.setAttribute('aria-hidden','true');}));
+
+  // Submit form to n8n webhook
+  contactForm.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(contactForm).entries());
+    try{
+      await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      alert("✅ Message sent! We'll get back to you soon.");
+      contactForm.reset();
+      contactModal.classList.remove('open');
+      contactModal.setAttribute('aria-hidden','true');
+    } catch(err){
+      alert("⚠️ Something went wrong. Please try again.");
+    }
+  });
+</script>
 
   <elevenlabs-convai agent-id="agent_0101k7fhnq31fdqam4jn9d1g7f1e"></elevenlabs-convai>
   <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
