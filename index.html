@@ -106,31 +106,38 @@
   </header>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="grid">
-        <div>
-          <div class="eyebrow">Family Dentistry • Winnipeg</div>
-          <h1>Your Smile, Our Passion</h1>
-          <p class="lead">Friendly care, modern technology, and <b>24/7 AI Receptionist</b> that answers calls and messages—even after hours.</p>
-          <div class="cta-row">
-            <button class="btn primary" id="open-book-cta">Book Appointment</button>
-            <a class="btn ghost" href="#services">Explore Services</a>
-          </div>
-          <ul class="mini-list">
-            <li>Online booking & instant confirmations</li>
-            <li>Text & voice assistant embedded on this site</li>
-            <li>Emergency slots held daily</li>
-          </ul>
-        </div>
-        <div class="card-hero">
-          <strong>AI Receptionist (Live)</strong>
-          <p class="muted" style="margin:.25rem 0 1rem">Tap the voice bubble at bottom-right to ask hours, insurance, or to start booking.</p>
-          <div class="pill">Powered by ElevenLabs</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <section class="hero" style="
+  position: relative;
+  overflow: hidden;
+  background: url('https://i.pinimg.com/736x/59/27/e1/5927e153f91ce228885fa91b6522d90e.jpg') center/cover no-repeat;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;">
+  
+  <!-- Blur + dark overlay -->
+  <div style="
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.45);
+    z-index: 1;">
+  </div>
+
+  <div style="position: relative; z-index: 2; max-width: 800px; padding: 20px;">
+    <h1 style="font-size: 3em; margin-bottom: 10px;">Your Smile, Our Passion</h1>
+    <p style="font-size: 1.2em; margin-bottom: 30px; color: #e2e8f0;">
+      Providing exceptional dental care for the whole family in a friendly and modern environment.
+    </p>
+    <a href="#" id="open-book-hero" 
+       style="display: inline-block; background-color: #007BFF; color: #fff; padding: 15px 30px;
+              font-size: 1.1em; text-decoration: none; border-radius: 6px; transition: background-color 0.3s;">
+      Book an Appointment
+    </a>
+  </div>
+</section>
 
   <!-- Services -->
   <section id="services" class="wrap">
