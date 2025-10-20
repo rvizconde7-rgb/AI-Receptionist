@@ -527,4 +527,53 @@
     });
   </script>
 </body>
+
+  <!-- Booking Wizard Modal -->
+<div class="modal" id="modal-book" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="book-title">
+    <div class="modal-head">
+      <h4 id="book-title">Schedule Your Appointment</h4>
+      <button class="close" data-close>&times;</button>
+    </div>
+    <div class="modal-body" style="padding:20px;overflow:auto;max-height:75vh;">
+      <form id="bookForm">
+        <h3 style="margin-top:0;">1️⃣ What brings you in today?</h3>
+        <select id="bk-reason" name="reason" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+          <option value="">Select reason</option>
+          <option>Emergency / Toothache</option>
+          <option>Cleaning / Check-up</option>
+          <option>Cosmetic</option>
+          <option>Exam / Consultation</option>
+        </select>
+
+        <h3>2️⃣ Preferred Practitioner</h3>
+        <select id="bk-doctor" name="doctor" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+          <option value="">Select</option>
+          <option>Dr. Alex Booth</option>
+          <option>Dr. Maya Chen</option>
+          <option>Dr. Shaun Corbett</option>
+          <option>Any Available</option>
+        </select>
+
+        <h3>3️⃣ Date & Time</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+          <input type="date" id="bk-date" name="date" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
+          <input type="time" id="bk-time" name="time" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
+        </div>
+
+        <h3>4️⃣ Your Information</h3>
+        <input id="bk-name" name="name" placeholder="Full Name" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:12px;font-size:1rem;">
+        <input id="bk-email" name="email" type="email" placeholder="Email Address" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:12px;font-size:1rem;">
+        <input id="bk-phone" name="phone" placeholder="Phone Number" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+        <select id="bk-type" name="patient_status" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:20px;font-size:1rem;">
+          <option value="New">New Patient</option>
+          <option value="Existing">Existing Patient</option>
+        </select>
+
+        <button type="submit" class="btn primary" style="width:100%;justify-content:center">Confirm Appointment</button>
+      </form>
+    </div>
+  </div>
+</div>
+  
 </html>
