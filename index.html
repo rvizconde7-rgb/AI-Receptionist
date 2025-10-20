@@ -1,224 +1,307 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brightside Dental Clinic - Your Smile, Our Passion</title>
-    <style>
-        /* --- Basic Setup --- */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Brightside Dental Clinic — Your Smile, Our Passion</title>
+  <meta name="description" content="Brightside Dental: family-friendly care, easy online booking, and an AI receptionist that answers 24/7." />
+  <style>
+    :root{
+      --bg:#f7fafc;
+      --panel:#ffffff;
+      --text:#1f2a44;
+      --muted:#68738a;
+      --brand:#2563eb;   /* blue */
+      --brand-600:#1e4fd6;
+      --brand-50:#eaf2ff;
+      --accent:#00b3a4;  /* mint accent for small highlights */
+      --ring: rgba(37,99,235,.35);
+      --shadow: 0 10px 25px rgba(16,24,40,.08);
+      --radius:14px;
+    }
 
-        /* --- Container for Centering Content --- */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%}
+    body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+         color:var(--text); background:var(--bg); line-height:1.6}
 
-        /* --- Header & Navigation --- */
-        header {
-            background-color: #ffffff;
-            padding: 15px 0;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* Header / Nav */
+    header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e9f2}
+    .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--brand)}
+    .logo-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),#3b82f6)}
+    .nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+    .nav a{color:var(--muted);text-decoration:none;font-weight:600}
+    .nav a:hover{color:var(--brand)}
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    /* Hero */
+    .hero{background:linear-gradient(180deg,var(--brand-50),#f6f9ff);padding:72px 20px}
+    .wrap{max-width:1100px;margin:0 auto}
+    .hero .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:36px;align-items:center}
+    .eyebrow{color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+    h1{font-size:3rem;line-height:1.1;margin:.4rem 0 1rem}
+    .lead{color:#3d4960;font-size:1.125rem}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:14px 18px;font-weight:700;cursor:pointer}
+    .btn.primary{background:var(--brand);color:#fff;box-shadow:var(--shadow)}
+    .btn.primary:hover{background:var(--brand-600)}
+    .btn.ghost{background:#fff;color:var(--brand);border:1px solid #e5e9f2}
+    .card-hero{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}
+    .mini-list{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem}
 
-        .logo {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #007BFF;
-        }
+    /* Sections */
+    section{padding:56px 20px}
+    .section-title{font-size:2rem;margin:0 0 18px}
+    .muted{color:var(--muted)}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .card{background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    .card h3{margin:0 0 8px;color:var(--brand)}
+    .pill{display:inline-block;background:var(--brand-50);color:var(--brand);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
 
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+    /* About / Contact blocks */
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 
-        nav ul li {
-            margin-left: 25px;
-        }
+    /* Footer */
+    footer{background:#0f172a;color:#c9d3ea;padding:32px 20px;margin-top:36px}
+    .foot-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr .8fr .8fr;gap:22px}
+    .foot-grid a{color:#dbe7ff;text-decoration:none}
+    .foot-grid a:hover{text-decoration:underline}
 
-        nav a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
+    /* Sticky action */
+    .fab{position:fixed;right:20px;bottom:20px;display:flex;gap:12px;z-index:60}
+    .fab .btn{border-radius:999px;padding:14px 18px}
 
-        nav a:hover {
-            color: #007BFF;
-        }
+    /* Modal (for Airtable embeds) */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,.58);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
+    .modal.open{display:flex}
+    .modal-panel{background:#fff;border-radius:18px;max-width:900px;width:100%;max-height:90vh;overflow:hidden;box-shadow:0 25px 60px rgba(2,6,23,.25)}
+    .modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #eef2f9}
+    .modal-head h4{margin:0;font-size:1.1rem}
+    .modal-body{height:72vh}
+    .modal iframe{width:100%;height:100%;border:0}
+    .close{background:transparent;border:0;font-size:1.3rem;cursor:pointer}
 
-        /* --- Hero Section --- */
-        .hero {
-            background-color: #eaf6ff;
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .hero h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            color: #0056b3;
-        }
-
-        .hero p {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: #007BFF;
-            color: #fff;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* --- Services Section --- */
-        .services {
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .services h2 {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-        }
-
-        .service-cards {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            width: 300px;
-            text-align: left;
-        }
-
-        .card h3 {
-            color: #007BFF;
-            margin-top: 0;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-
-        /* --- Voice AI Widget Styling --- */
-        elevenlabs-convai {
-            position: fixed;
-            bottom: 90px; /* Position above the chat widget */
-            right: 20px;
-            z-index: 999;
-        }
-
-    </style>
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero .grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      h1{font-size:2.25rem}
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">Brightside Dental</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="logo"><span class="logo-badge"></span> Brightside Dental</div>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#" id="open-book-hero"><span class="pill">Book Appointment</span></a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <section class="hero">
-            <h1>Your Smile, Our Passion</h1>
-            <p>Providing exceptional dental care for the whole family in a friendly and modern environment.</p>
-            <a href="#" class="cta-button">Book an Appointment</a>
-        </section>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <div class="eyebrow">Family Dentistry • Winnipeg</div>
+          <h1>Your Smile, Our Passion</h1>
+          <p class="lead">Friendly care, modern technology, and <b>24/7 AI Receptionist</b> that answers calls and messages—even after hours.</p>
+          <div class="cta-row">
+            <button class="btn primary" id="open-book-cta">Book Appointment</button>
+            <a class="btn ghost" href="#services">Explore Services</a>
+          </div>
+          <ul class="mini-list">
+            <li>Online booking & instant confirmations</li>
+            <li>Text & voice assistant embedded on this site</li>
+            <li>Emergency slots held daily</li>
+          </ul>
+        </div>
+        <div class="card-hero">
+          <strong>AI Receptionist (Live)</strong>
+          <p class="muted" style="margin:.25rem 0 1rem">Tap the voice bubble at bottom-right to ask hours, insurance, or to start booking.</p>
+          <div class="pill">Powered by ElevenLabs</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <section class="services container">
-            <h2>Our Services</h2>
-            <div class="service-cards">
-                <div class="card">
-                    <h3>General Dentistry</h3>
-                    <p>Comprehensive check-ups, cleanings, and preventative care to keep your smile healthy and bright for years to come.</p>
-                </div>
-                <div class="card">
-                    <h3>Cosmetic Dentistry</h3>
-                    <p>Transform your smile with our range of cosmetic services, including teeth whitening, veneers, and bonding.</p>
-                </div>
-                <div class="card">
-                    <h3>Dental Implants</h3>
-                    <p>Restore function and aesthetics with our state-of-the-art dental implants, a permanent solution for missing teeth.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+  <!-- Services -->
+  <section id="services" class="wrap">
+    <h2 class="section-title">Our Services</h2>
+    <p class="muted">Preventive, cosmetic, and restorative care for every stage of life.</p>
+    <div class="grid-3" style="margin-top:18px">
+      <div class="card">
+        <h3>General Dentistry</h3>
+        <p>Exams, cleanings, fillings, fluoride, and digital X-rays to keep your smile healthy.</p>
+      </div>
+      <div class="card">
+        <h3>Cosmetic</h3>
+        <p>Whitening, veneers, bonding, and smile makeovers tailored to your goals.</p>
+      </div>
+      <div class="card">
+        <h3>Implants</h3>
+        <p>Modern implant options to restore function and aesthetics with long-term stability.</p>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2025 Brightside Dental Clinic. All Rights Reserved.</p>
-    </footer>
+  <!-- About + Why AI -->
+  <section id="about" class="wrap">
+    <div class="two">
+      <div class="card">
+        <h2 class="section-title">About Brightside</h2>
+        <p>We combine friendly clinical care with convenient tech. Book online, confirm by text, and talk to our AI receptionist anytime.</p>
+        <ul class="mini-list">
+          <li>Weekend & evening availability</li>
+          <li>Direct billing to most insurers</li>
+          <li>Emergency visits welcome</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 class="section-title">How Online Booking Works</h2>
+        <ol class="mini-list">
+          <li>Click <b>Book Appointment</b> and choose your reason.</li>
+          <li>Pick a preferred date/time and submit.</li>
+          <li>We confirm by text/email and see you in clinic.</li>
+        </ol>
+        <p class="muted" style="margin-top:8px">All requests are logged in our scheduling dashboard instantly.</p>
+      </div>
+    </div>
+  </section>
 
-    <!-- Voice AI Widget (ElevenLabs) -->
-    <elevenlabs-convai agent-id="agent_0101k7fhnq31fdqam4jn9d1g7f1e"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-    
-    <!-- Text Chatbot widget (n8n) -->
-    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-    <script type="module">
-        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+  <!-- Contact -->
+  <section id="contact" class="wrap">
+    <div class="two">
+      <div class="card">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="muted">Questions about treatment or insurance? Send us a message and our team will reply shortly.</p>
+        <div class="cta-row">
+          <button class="btn primary" id="open-contact">Open Contact Form</button>
+          <a class="btn ghost" href="tel:+12045550123">Call Us: +1 (204) 555-0123</a>
+        </div>
+        <p class="muted" style="margin-top:10px">Calls can be answered by our AI receptionist and routed to staff when needed.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin:0 0 6px;color:var(--brand)">Visit</h3>
+        <p>500 Grey Street, Winnipeg, MB</p>
+        <h3 style="margin:14px 0 6px;color:var(--brand)">Hours</h3>
+        <p>Mon–Fri 9:00–5:30 • Sat 9:00–4:00 • Sun Closed</p>
+        <h3 style="margin:14px 0 6px;color:var(--brand)">Email</h3>
+        <p><a href="mailto:hello@brightsidedental.demo">hello@brightsidedental.demo</a></p>
+      </div>
+    </div>
+  </section>
 
-        createChat({
-            webhookUrl: 'https://forgeai.app.n8n.cloud/webhook/d7408e68-b285-4320-bd98-540738dcc36e/chat',
-            mode: 'float', // floating button at bottom-right
-            theme: {
-                primaryColor: "#2563eb",
-                headerColor: "#1f2937",
-            },
-            initialMessages: [
-                "Hello! Brightside Bot here. I can help you with text-based inquiries. For voice assistance, click the voice button!"
-            ],
-            showWelcomeScreen: false
-        });
-    </script>
-    
+  <!-- Footer -->
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <strong>Brightside Dental</strong>
+        <p class="muted">Friendly care + modern convenience. Book online or talk to our AI receptionist 24/7.</p>
+      </div>
+      <div>
+        <strong>Links</strong><br/>
+        <a href="#services">Services</a><br/>
+        <a href="#about">About</a><br/>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <strong>Book</strong><br/>
+        <a href="#" id="open-book-footer">Book Appointment</a><br/>
+        <a href="tel:+12045550123">Call +1 (204) 555-0123</a>
+      </div>
+    </div>
+    <p style="margin-top:18px;font-size:.9rem;color:#9fb1d7">&copy; 2025 Brightside Dental Clinic. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Sticky FAB actions -->
+  <div class="fab">
+    <button class="btn primary" id="open-book-fab">Book</button>
+    <a class="btn ghost" href="tel:+12045550123">Call</a>
+  </div>
+
+  <!-- Appointment Modal (Airtable form embed) -->
+  <div class="modal" id="modal-appointment" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="appt-title">
+      <div class="modal-head">
+        <h4 id="appt-title">Schedule Your Appointment</h4>
+        <button class="close" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Replace with your Airtable "Embed this form" URL -->
+        <iframe
+          src="AIRTABLE_APPOINTMENT_EMBED_URL_HERE"
+          title="Appointment Form"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal (Airtable form embed) -->
+  <div class="modal" id="modal-contact" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="ctc-title">
+      <div class="modal-head">
+        <h4 id="ctc-title">Send Us a Message</h4>
+        <button class="close" data-close>&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Replace with your Airtable "Embed this form" URL -->
+        <iframe
+          src="AIRTABLE_CONTACT_EMBED_URL_HERE"
+          title="Contact Form"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ElevenLabs Voice Agent (kept) -->
+  <elevenlabs-convai agent-id="agent_0101k7fhnq31fdqam4jn9d1g7f1e"></elevenlabs-convai>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+  <script>
+    // Smooth-scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+
+    // Modal helpers
+    const apptModal = document.getElementById('modal-appointment');
+    const contactModal = document.getElementById('modal-contact');
+    const openApptBtns = ['open-book-hero','open-book-cta','open-book-footer','open-book-fab']
+      .map(id=>document.getElementById(id)).filter(Boolean);
+    openApptBtns.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); open(apptModal)}));
+    document.getElementById('open-book-hero')?.addEventListener('click',e=>{e.preventDefault(); open(apptModal)});
+    document.getElementById('open-contact')?.addEventListener('click',e=>{e.preventDefault(); open(contactModal)});
+
+    function open(modal){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
+    function close(modal){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+    document.querySelectorAll('[data-close]').forEach(btn=>{
+      btn.addEventListener('click', ()=> close(btn.closest('.modal')));
+    });
+    [apptModal,contactModal].forEach(m=>{
+      m.addEventListener('click', (e)=>{ if(e.target===m) close(m); });
+    });
+
+    // Optional: prefill Airtable forms (works if fields match)
+    // Example appending ?prefill_Name=&prefill_Phone=
+    // You can add query params based on context if needed.
+  </script>
 </body>
 </html>
