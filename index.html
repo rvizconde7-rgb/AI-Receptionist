@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Brightside Dental Clinic — Your Smile, Our Passion</title>
   <meta name="description" content="Brightside Dental: family-friendly care, easy online booking, and an AI receptionist that answers 24/7." />
+
   <style>
     :root{
       --bg:#f7fafc;
@@ -23,8 +24,10 @@
 
     *{box-sizing:border-box}
     html,body{margin:0;height:100%}
-    body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
-         color:var(--text); background:var(--bg); line-height:1.6}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text); background:var(--bg); line-height:1.6
+    }
 
     header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e9f2;box-shadow:0 2px 8px rgba(16,24,40,.04)}
     .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
@@ -34,19 +37,18 @@
     .nav a{color:var(--muted);text-decoration:none;font-weight:600;transition:color .3s}
     .nav a:hover{color:var(--brand)}
 
-    .hero{background:linear-gradient(180deg,var(--brand-50),#f6f9ff);padding:72px 20px;position:relative;overflow:hidden;background:url('https://i.pinimg.com/736x/59/27/e1/5927e153f91ce228885fa91b6522d90e.jpg') center/cover no-repeat;min-height:75vh;display:flex;align-items:center;justify-content:center;text-align:center;color:white}
+    .hero{
+      background:url('https://i.pinimg.com/736x/59/27/e1/5927e153f91ce228885fa91b6522d90e.jpg') center/cover no-repeat;
+      position:relative;min-height:75vh;display:flex;align-items:center;justify-content:center;text-align:center;color:white;
+    }
     .hero::before{content:'';position:absolute;inset:0;backdrop-filter:blur(6px);background:rgba(0,0,0,0.45);z-index:1}
     .hero-content{position:relative;z-index:2;max-width:800px;padding:20px}
     .hero h1{font-size:3em;margin-bottom:10px;font-weight:900;letter-spacing:-.02em}
     .hero p{font-size:1.2em;margin-bottom:30px;color:#e2e8f0}
 
     .wrap{max-width:1100px;margin:0 auto}
-    .eyebrow{color:var(--brand);font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
-    section{padding:56px 20px}
     .section-title{font-size:2rem;margin:0 0 12px;font-weight:800}
     .section-desc{color:var(--muted);font-size:1rem;margin-bottom:28px}
-    .muted{color:var(--muted)}
-    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
     .btn{appearance:none;border:0;border-radius:12px;padding:14px 20px;font-weight:700;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
     .btn.primary{background:var(--brand);color:#fff;box-shadow:var(--shadow)}
     .btn.primary:hover{background:var(--brand-600);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
@@ -60,53 +62,30 @@
     .card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
     .card h3{margin:0 0 10px;color:var(--brand);font-size:1.2rem}
     .card p{margin:0;font-size:.95rem;line-height:1.6}
-    .card-icon{font-size:2.5rem;margin-bottom:12px}
-    .pill{display:inline-block;background:var(--brand-50);color:var(--brand);padding:8px 14px;border-radius:999px;font-size:.8rem;font-weight:700}
     .mini-list{margin:8px 0;padding-left:18px;color:var(--muted);font-size:.95rem}
-
-    .feature-row{display:flex;gap:16px;align-items:flex-start;margin:16px 0}
-    .feature-icon{width:28px;height:28px;background:var(--brand-50);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--brand);font-weight:700;flex-shrink:0;font-size:.9rem}
 
     .footer{background:#0f172a;color:#c9d3ea;padding:48px 20px;margin-top:48px}
     .foot-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
-    .foot-grid h4{margin:0 0 12px;color:#fff;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-    .foot-grid a{color:#dbe7ff;text-decoration:none;font-size:.9rem;transition:color .3s}
+    .foot-grid a{color:#dbe7ff;text-decoration:none;font-size:.9rem}
     .foot-grid a:hover{color:#fff}
-    .foot-grid p{margin:6px 0;font-size:.9rem;line-height:1.6}
-
-    .fab{position:fixed;right:20px;bottom:20px;display:flex;gap:12px;z-index:60}
-    .fab .btn{border-radius:999px;padding:14px 18px;font-size:.9rem}
+    .foot-grid h4{margin:0 0 12px;color:#fff;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 
     .modal{position:fixed;inset:0;background:rgba(2,6,23,.58);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
     .modal.open{display:flex}
-    .modal-panel{background:#fff;border-radius:18px;max-width:900px;width:100%;max-height:90vh;overflow:hidden;box-shadow:0 25px 60px rgba(2,6,23,.25)}
+    .modal-panel{background:#fff;border-radius:18px;max-width:700px;width:100%;max-height:90vh;overflow:hidden;box-shadow:0 25px 60px rgba(2,6,23,.25)}
     .modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #eef2f9;background:var(--brand-50)}
     .modal-head h4{margin:0;font-size:1.2rem;color:var(--brand);font-weight:800}
-    .modal-body{height:72vh}
-    .modal iframe{width:100%;height:100%;border:0}
-    .close{background:transparent;border:0;font-size:1.5rem;cursor:pointer;color:var(--brand);transition:color .3s}
+    .close{background:transparent;border:0;font-size:1.5rem;cursor:pointer;color:var(--brand)}
     .close:hover{color:var(--brand-600)}
-
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
-    .stat{background:var(--panel);padding:20px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow)}
-    .stat-number{font-size:2rem;font-weight:900;color:var(--brand)}
-    .stat-label{color:var(--muted);font-size:.9rem;font-weight:600}
-
-    .testimonial{background:var(--panel);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border-left:4px solid var(--brand)}
-    .testimonial p{margin:0 0 12px;font-style:italic;color:var(--text)}
-    .testimonial-author{color:var(--muted);font-size:.9rem;font-weight:600}
-
-    @media (max-width: 900px){
+    @media (max-width:900px){
       .grid-4{grid-template-columns:repeat(2,1fr)}
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      .stats{grid-template-columns:repeat(2,1fr)}
-      .hero h1{font-size:2.25rem}
+      .grid-3,.grid-2{grid-template-columns:1fr}
       .foot-grid{grid-template-columns:1fr}
-      .nav ul{gap:12px;font-size:.9rem}
+      .hero h1{font-size:2.25rem}
     }
   </style>
 </head>
+
 <body>
 
   <header>
@@ -117,7 +96,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#" id="open-book-nav"><span class="pill">Book Now</span></a></li>
+        <li><a href="#" id="open-book-nav"><span class="btn ghost" style="padding:6px 12px">Book Now</span></a></li>
       </ul>
     </nav>
   </header>
@@ -126,205 +105,18 @@
     <div class="hero-content">
       <h1>Your Smile, Our Passion</h1>
       <p>Providing exceptional dental care for the whole family in a friendly and modern environment.</p>
-      <a href="#" id="open-book-hero" class="btn primary" style="margin-top:20px;justify-content:center;width:fit-content;margin-left:auto;margin-right:auto;">
-        Book an Appointment
-      </a>
+      <a href="#" id="open-book-hero" class="btn primary">Book an Appointment</a>
     </div>
   </section>
 
   <section id="services" class="wrap">
     <h2 class="section-title">Our Services</h2>
-    <p class="section-desc">Comprehensive dental care tailored to your unique needs. From preventive care to advanced cosmetic solutions.</p>
-    
+    <p class="section-desc">Comprehensive dental care tailored to your unique needs.</p>
     <div class="grid-4">
-      <div class="card">
-        <div class="card-icon">🦷</div>
-        <h3>Exams & Cleanings</h3>
-        <p>Regular checkups and professional cleanings to maintain optimal oral health and prevent future issues.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">💎</div>
-        <h3>Teeth Whitening</h3>
-        <p>Professional whitening treatments for a brighter, more radiant smile in just one visit.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🔧</div>
-        <h3>Fillings & Repairs</h3>
-        <p>Modern composite fillings that blend seamlessly with natural teeth for invisible restorations.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">✨</div>
-        <h3>Cosmetic Veneers</h3>
-        <p>Custom porcelain veneers to reshape and perfect your smile with natural-looking results.</p>
-      </div>
-    </div>
-
-    <div class="grid-4" style="margin-top:18px">
-      <div class="card">
-        <div class="card-icon">🪥</div>
-        <h3>Root Canal Therapy</h3>
-        <p>Advanced endodontic treatment to save infected or damaged teeth and eliminate pain.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🦣</div>
-        <h3>Dental Implants</h3>
-        <p>Permanent tooth replacement solutions with natural look, feel, and function.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">👶</div>
-        <h3>Pediatric Dentistry</h3>
-        <p>Gentle, child-friendly care to keep your little ones' smiles healthy and cavity-free.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🛡️</div>
-        <h3>Orthodontics</h3>
-        <p>Braces and clear aligners to straighten teeth and create the perfect bite at any age.</p>
-      </div>
-    </div>
-
-    <div class="grid-4" style="margin-top:18px">
-      <div class="card">
-        <div class="card-icon">😷</div>
-        <h3>Periodontal Care</h3>
-        <p>Treatment for gum disease to restore gum health and prevent tooth loss.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🌙</div>
-        <h3>Sleep Apnea Devices</h3>
-        <p>Custom oral appliances to manage sleep apnea and improve sleep quality.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">🎯</div>
-        <h3>Crowns & Bridges</h3>
-        <p>Durable restorations to repair severely damaged teeth or replace missing ones.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">⚡</div>
-        <h3>Emergency Services</h3>
-        <p>Same-day emergency care for dental pain, trauma, and urgent situations.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="wrap">
-    <h2 class="section-title">Why Choose Brightside?</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>Experience & Expertise</h3>
-        <p>Our dental professionals bring years of clinical experience and continuing education to every patient interaction.</p>
-        <ul class="mini-list">
-          <li>Board-certified dentists</li>
-          <li>Advanced training in implants & cosmetics</li>
-          <li>Latest dental technology</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Patient-First Approach</h3>
-        <p>We prioritize your comfort, concerns, and goals in a judgment-free environment.</p>
-        <ul class="mini-list">
-          <li>Compassionate care for anxious patients</li>
-          <li>Sedation options available</li>
-          <li>Personalized treatment plans</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Modern Technology</h3>
-        <p>State-of-the-art equipment ensures accurate diagnoses and efficient, comfortable treatment.</p>
-        <ul class="mini-list">
-          <li>Digital X-rays (80% less radiation)</li>
-          <li>Intraoral cameras</li>
-          <li>Digital smile design</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Convenient Access</h3>
-        <p>Easy scheduling, flexible hours, and online booking make dental care accessible.</p>
-        <ul class="mini-list">
-          <li>Online appointment booking</li>
-          <li>Weekend & evening hours</li>
-          <li>Direct insurance billing</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-number">1200+</div>
-        <div class="stat-label">Happy Patients</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">15+</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">98%</div>
-        <div class="stat-label">Satisfaction Rate</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">AI Support</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="about" class="wrap">
-    <h2 class="section-title">How We Work</h2>
-    <div class="grid-2">
-      <div class="card">
-        <h3>About Brightside</h3>
-        <p>Brightside Dental combines clinical excellence with modern convenience. We believe everyone deserves quality dental care without the hassle. Our team is dedicated to making your visit comfortable, efficient, and hassle-free.</p>
-        <div class="feature-row">
-          <div class="feature-icon">✓</div>
-          <div>
-            <strong>Friendly & Professional Staff</strong>
-            <p style="margin:4px 0 0;font-size:.9rem;color:var(--muted)">Caring professionals who treat you like family</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-icon">✓</div>
-          <div>
-            <strong>Transparent Pricing</strong>
-            <p style="margin:4px 0 0;font-size:.9rem;color:var(--muted)">Clear costs, no hidden surprises</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-icon">✓</div>
-          <div>
-            <strong>Flexible Payment Options</strong>
-            <p style="margin:4px 0 0;font-size:.9rem;color:var(--muted)">Multiple payment methods accepted</p>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <h3>Online Booking Process</h3>
-        <ol class="mini-list">
-          <li><strong>Select Service</strong> — Choose the type of appointment you need.</li>
-          <li><strong>Pick Your Time</strong> — Choose from available dates and times that work for you.</li>
-          <li><strong>Confirm Details</strong> — Provide your contact information and insurance details.</li>
-          <li><strong>Receive Confirmation</strong> — Get confirmation via text and email with reminders.</li>
-          <li><strong>Visit Us</strong> — Arrive 10 minutes early to complete any necessary forms.</li>
-        </ol>
-        <p class="muted" style="margin-top:16px;font-size:.9rem">Not sure which service you need? Our AI receptionist can help guide you 24/7.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="testimonials" class="wrap">
-    <h2 class="section-title">Patient Reviews</h2>
-    <p class="section-desc">Don't just take our word for it — hear from our happy patients.</p>
-    <div class="grid-3">
-      <div class="testimonial">
-        <p>"Brightside completely changed my experience with dental care. The staff is warm and professional, and I felt truly comfortable for the first time in years."</p>
-        <div class="testimonial-author">— Sarah M.</div>
-      </div>
-      <div class="testimonial">
-        <p>"The online booking system is fantastic, and the AI receptionist answered all my questions about my insurance coverage. Highly recommend!"</p>
-        <div class="testimonial-author">— James R.</div>
-      </div>
-      <div class="testimonial">
-        <p>"My teeth whitening results were incredible. Dr. Chen explained everything step-by-step. I'm so happy with my smile!"</p>
-        <div class="testimonial-author">— Maria T.</div>
-      </div>
+      <div class="card"><h3>🦷 Exams & Cleanings</h3><p>Maintain oral health and prevent issues.</p></div>
+      <div class="card"><h3>💎 Teeth Whitening</h3><p>Brighten your smile in one visit.</p></div>
+      <div class="card"><h3>🔧 Fillings & Repairs</h3><p>Natural-looking restorations for damaged teeth.</p></div>
+      <div class="card"><h3>✨ Cosmetic Veneers</h3><p>Custom porcelain veneers for a perfect smile.</p></div>
     </div>
   </section>
 
@@ -334,288 +126,145 @@
     <div class="grid-2">
       <div class="card">
         <h3>Contact Options</h3>
-        <div class="feature-row">
-          <div class="feature-icon">📞</div>
-          <div>
-            <strong>Call Us</strong>
-            <p style="margin:4px 0 0;font-size:.95rem"><a href="tel:+12045550123" style="color:var(--brand);text-decoration:none">+1 (204) 555-0123</a></p>
-            <p style="margin:4px 0 0;font-size:.9rem;color:var(--muted)">Available Mon–Fri 9am–5:30pm, Sat 9am–4pm</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-icon">✉️</div>
-          <div>
-            <strong>Email Us</strong>
-            <p style="margin:4px 0 0;font-size:.95rem"><a href="mailto:hello@brightsidedental.demo" style="color:var(--brand);text-decoration:none">hello@brightsidedental.demo</a></p>
-            <p style="margin:4px 0 0;font-size:.9rem;color:var(--muted)">Response within 24 hours</p>
-          </div>
-        </div>
-        <div class="feature-row">
-          <div class="feature-icon">🤖</div>
-          <div>
-            <strong>AI Receptionist</strong>
-            <p style="margin:4px 0 0;font-size:.95rem">Available 24/7</p>
-            <p style="margin:4px 0 0;font-size:.9rem;color:var(--muted)">Ask questions, schedule, get info anytime</p>
-          </div>
-        </div>
-        <div class="cta-row" style="margin-top:20px">
+        <p><strong>Call:</strong> <a href="tel:+12045550123" style="color:var(--brand)">+1 (204) 555-0123</a></p>
+        <p><strong>Email:</strong> <a href="mailto:hello@brightsidedental.demo" style="color:var(--brand)">hello@brightsidedental.demo</a></p>
+        <div class="cta-row">
           <button class="btn primary" id="open-contact">Send Message</button>
           <button class="btn ghost" id="open-book-contact">Book Appointment</button>
         </div>
       </div>
       <div class="card">
-        <h3>📍 Visit Us</h3>
-        <p><strong>Brightside Dental Clinic</strong></p>
-        <p>500 Grey Street<br>Winnipeg, MB R3B 1S9<br>Canada</p>
-        
-        <h3 style="margin-top:24px">🕐 Hours</h3>
-        <p>
-          <strong>Monday – Friday:</strong> 9:00 AM – 5:30 PM<br>
-          <strong>Saturday:</strong> 9:00 AM – 4:00 PM<br>
-          <strong>Sunday:</strong> Closed
-        </p>
-        
-        <h3 style="margin-top:24px">💳 We Accept</h3>
-        <p>Major insurance plans, direct billing available. Cash, card, and financing options.</p>
+        <h3>Visit Us</h3>
+        <p>500 Grey Street, Winnipeg, MB<br>Canada</p>
       </div>
     </div>
   </section>
 
   <footer class="footer">
     <div class="foot-grid">
-      <div>
-        <strong style="color:#fff">Brightside Dental</strong>
-        <p>Quality dental care meets modern convenience. Your smile is our passion.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <a href="#services">Services</a><br/>
-        <a href="#about">About</a><br/>
-        <a href="#testimonials">Reviews</a><br/>
-        <a href="#contact">Contact</a>
-      </div>
-      <div>
-        <h4>Book</h4>
-        <a href="#" id="open-book-footer">Book Appointment</a><br/>
-        <a href="tel:+12045550123">Call +1 (204) 555-0123</a><br/>
-        <a href="mailto:hello@brightsidedental.demo">Email Us</a>
-      </div>
-      <div>
-        <h4>Hours</h4>
-        <p><strong>Mon–Fri:</strong> 9:00–5:30 PM</p>
-        <p><strong>Saturday:</strong> 9:00–4:00 PM</p>
-        <p><strong>Sunday:</strong> Closed</p>
-      </div>
+      <div><strong>Brightside Dental</strong><p>Your smile is our passion.</p></div>
+      <div><h4>Quick Links</h4><a href="#services">Services</a><br><a href="#about">About</a><br><a href="#testimonials">Reviews</a></div>
+      <div><h4>Book</h4><a href="#" id="open-book-footer">Book Appointment</a></div>
+      <div><h4>Hours</h4><p>Mon–Fri: 9–5:30 PM<br>Sat: 9–4 PM<br>Sun: Closed</p></div>
     </div>
-    <p style="margin-top:24px;font-size:.9rem;color:#9fb1d7;text-align:center">&copy; 2025 Brightside Dental Clinic. All Rights Reserved. | Privacy Policy</p>
+    <p style="text-align:center;margin-top:24px;font-size:.9rem;color:#9fb1d7">©2025 Brightside Dental Clinic</p>
   </footer>
 
-  <div class="modal" id="modal-appointment" aria-hidden="true">
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="appt-title">
-      <div class="modal-head">
-        <h4 id="appt-title">Schedule Your Appointment</h4>
-        <button class="close" data-close>&times;</button>
-      </div>
-      <div class="modal-body">
-        <iframe
-          src="AIRTABLE_APPOINTMENT_EMBED_URL_HERE"
-          title="Appointment Form"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+  <!-- Contact Modal -->
+  <div class="modal" id="modal-contact" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-head"><h4>Send Us a Message</h4><button class="close" data-close>&times;</button></div>
+      <div class="modal-body" style="padding:20px">
+        <form id="contactForm">
+          <label>Full Name</label>
+          <input name="name" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+          <label>Email Address</label>
+          <input name="email" type="email" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+          <label>Reason for Contact</label>
+          <select name="reason" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+            <option value="">Select</option><option>General Inquiry</option><option>Appointment</option><option>Billing / Insurance</option>
+          </select>
+          <label>Message</label>
+          <textarea name="message" rows="4" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:16px;"></textarea>
+          <button type="submit" class="btn primary" style="width:100%;justify-content:center">Send Message</button>
+        </form>
       </div>
     </div>
   </div>
 
-<!-- Contact Modal -->
-<div class="modal" id="modal-contact" aria-hidden="true">
-  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="ctc-title">
-    <div class="modal-head">
-      <h4 id="ctc-title">Send Us a Message</h4>
-      <button class="close" data-close>&times;</button>
-    </div>
-    <div class="modal-body" style="padding:20px">
-      <form id="contactForm">
-        <label for="ctc-name" style="font-weight:600;display:block;margin-bottom:6px;">Full Name</label>
-        <input id="ctc-name" name="name" placeholder="e.g. Sarah Johnson" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+  <!-- Booking Wizard Modal -->
+  <div class="modal" id="modal-book" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-head"><h4>Schedule Your Appointment</h4><button class="close" data-close>&times;</button></div>
+      <div class="modal-body" style="padding:20px;overflow:auto;max-height:75vh;">
+        <form id="bookForm">
+          <h3>1️⃣ What brings you in today?</h3>
+          <select name="reason" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+            <option value="">Select</option><option>Emergency / Toothache</option><option>Cleaning / Check-up</option><option>Cosmetic</option><option>Exam / Consultation</option>
+          </select>
 
-        <label for="ctc-email" style="font-weight:600;display:block;margin-bottom:6px;">Email Address</label>
-        <input id="ctc-email" name="email" type="email" placeholder="your@email.com" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
+          <h3>2️⃣ Preferred Practitioner</h3>
+          <select name="doctor" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;">
+            <option value="">Select</option><option>Dr. Alex Booth</option><option>Dr. Maya Chen</option><option>Dr. Shaun Corbett</option><option>Any Available</option>
+          </select>
 
-        <label for="ctc-reason" style="font-weight:600;display:block;margin-bottom:6px;">Reason for Contact</label>
-        <select id="ctc-reason" name="reason" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
-          <option value="">Select a reason</option>
-          <option>General Inquiry</option>
-          <option>Book Appointment</option>
-          <option>Billing / Insurance</option>
-          <option>Other</option>
-        </select>
+          <h3>3️⃣ Date & Time</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <input type="date" name="date" required style="padding:12px;border:1px solid #ddd;border-radius:10px;">
+            <input type="time" name="time" required style="padding:12px;border:1px solid #ddd;border-radius:10px;">
+          </div>
 
-        <label for="ctc-msg" style="font-weight:600;display:block;margin-bottom:6px;">Message</label>
-        <textarea id="ctc-msg" name="message" rows="4" placeholder="How can we help?" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:20px;font-size:1rem;"></textarea>
+          <h3>4️⃣ Your Information</h3>
+          <input name="name" placeholder="Full Name" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px;">
+          <input name="email" type="email" placeholder="Email Address" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px;">
+          <input name="phone" placeholder="Phone Number" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px;">
+          <select name="patient_status" required style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin-bottom:20px;">
+            <option value="New">New Patient</option><option value="Existing">Existing Patient</option>
+          </select>
 
-        <button type="submit" class="btn primary" style="width:100%;justify-content:center">Send Message</button>
-      </form>
+          <button type="submit" class="btn primary" style="width:100%;justify-content:center">Confirm Appointment</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const contactModal = document.getElementById('modal-contact');
-  const contactForm = document.getElementById('contactForm');
-
-  // Open and close modal
-  document.getElementById('open-contact').addEventListener('click', e=>{
-    e.preventDefault();
-    contactModal.classList.add('open');
-    contactModal.setAttribute('aria-hidden','false');
-  });
-  contactModal.addEventListener('click', e=>{ if(e.target===contactModal){ contactModal.classList.remove('open'); contactModal.setAttribute('aria-hidden','true'); }});
-  document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>{contactModal.classList.remove('open');contactModal.setAttribute('aria-hidden','true');}));
-
-  // Submit form to n8n webhook
-  contactForm.addEventListener('submit', async e=>{
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(contactForm).entries());
-    try{
-      await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-      alert("✅ Message sent! We'll get back to you soon.");
-      contactForm.reset();
-      contactModal.classList.remove('open');
-      contactModal.setAttribute('aria-hidden','true');
-    } catch(err){
-      alert("⚠️ Something went wrong. Please try again.");
-    }
-  });
-</script>
-
-  <script>
-  const bookModal = document.getElementById('modal-book');
-  const bookForm = document.getElementById('bookForm');
-
-  // Open & Close Modal
-  ['open-book-hero','open-book-nav','open-book-footer','open-book-fab','open-book-contact']
-    .forEach(id => {
-      const el = document.getElementById(id);
-      if(el) el.addEventListener('click', e => {
-        e.preventDefault();
-        bookModal.classList.add('open');
-        bookModal.setAttribute('aria-hidden','false');
-      });
-    });
-
-  document.querySelectorAll('[data-close]').forEach(btn =>
-    btn.addEventListener('click',()=>{bookModal.classList.remove('open');bookModal.setAttribute('aria-hidden','true');})
-  );
-
-  bookModal.addEventListener('click', e => { if(e.target===bookModal){ bookModal.classList.remove('open');bookModal.setAttribute('aria-hidden','true'); }});
-
-  // Submit to n8n webhook
-  bookForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(bookForm).entries());
-    try {
-      await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "appointment", ...data })
-      });
-      alert(`✅ Appointment request sent!\n\nWe'll confirm availability at ${data.email}.`);
-      bookForm.reset();
-      bookModal.classList.remove('open');
-      bookModal.setAttribute('aria-hidden','true');
-    } catch (err) {
-      alert("⚠️ Something went wrong. Please try again.");
-    }
-  });
-</script>
-
-
+  <!-- ElevenLabs Widget -->
   <elevenlabs-convai agent-id="agent_0101k7fhnq31fdqam4jn9d1g7f1e"></elevenlabs-convai>
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async></script>
 
+  <!-- Scripts -->
   <script>
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href');
-        if(id.length>1){
-          e.preventDefault();
-          document.querySelector(id)?.scrollIntoView({behavior:'smooth',block:'start'});
-        }
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){e.preventDefault();document.querySelector(id)?.scrollIntoView({behavior:'smooth'});}
       });
     });
 
-    const apptModal = document.getElementById('modal-appointment');
-    const contactModal = document.getElementById('modal-contact');
-    const openApptBtns = ['open-book-hero','open-book-nav','open-book-footer','open-book-fab','open-book-contact']
-      .map(id=>document.getElementById(id)).filter(Boolean);
-    const openContactBtns = ['open-contact']
-      .map(id=>document.getElementById(id)).filter(Boolean);
-    
-    openApptBtns.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); open(apptModal)}));
-    openContactBtns.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); open(contactModal)}));
+    // Modal helpers
+    function openModal(m){m.classList.add('open');m.setAttribute('aria-hidden','false');}
+    function closeModal(m){m.classList.remove('open');m.setAttribute('aria-hidden','true');}
 
-    function open(modal){ modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); }
-    function close(modal){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
-    document.querySelectorAll('[data-close]').forEach(btn=>{
-      btn.addEventListener('click', ()=> close(btn.closest('.modal')));
+    // Contact modal
+    const contactModal=document.getElementById('modal-contact');
+    document.getElementById('open-contact').addEventListener('click',e=>{e.preventDefault();openModal(contactModal);});
+    contactModal.addEventListener('click',e=>{if(e.target===contactModal)closeModal(contactModal);});
+    contactModal.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeModal(contactModal)));
+
+    document.getElementById('contactForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const data=Object.fromEntries(new FormData(e.target).entries());
+      try{
+        await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90",{
+          method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({form:"contact",...data})
+        });
+        alert("✅ Message sent! We'll get back to you soon.");
+        e.target.reset();closeModal(contactModal);
+      }catch{alert("⚠️ Something went wrong. Please try again.");}
     });
-    [apptModal,contactModal].forEach(m=>{
-      m.addEventListener('click', (e)=>{ if(e.target===m) close(m); });
+
+    // Book modal
+    const bookModal=document.getElementById('modal-book');
+    ['open-book-hero','open-book-nav','open-book-footer','open-book-contact'].forEach(id=>{
+      const el=document.getElementById(id);if(el)el.addEventListener('click',e=>{e.preventDefault();openModal(bookModal);});
+    });
+    bookModal.addEventListener('click',e=>{if(e.target===bookModal)closeModal(bookModal);});
+    bookModal.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeModal(bookModal)));
+
+    document.getElementById('bookForm').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const data=Object.fromEntries(new FormData(e.target).entries());
+      try{
+        await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90",{
+          method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({form:"book_appointment",...data})
+        });
+        alert(`✅ Appointment request sent!\nWe'll confirm availability at ${data.email}.`);
+        e.target.reset();closeModal(bookModal);
+      }catch{alert("⚠️ Something went wrong. Please try again.");}
     });
   </script>
 </body>
-
-  <!-- Booking Wizard Modal -->
-<div class="modal" id="modal-book" aria-hidden="true">
-  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="book-title">
-    <div class="modal-head">
-      <h4 id="book-title">Schedule Your Appointment</h4>
-      <button class="close" data-close>&times;</button>
-    </div>
-    <div class="modal-body" style="padding:20px;overflow:auto;max-height:75vh;">
-      <form id="bookForm">
-        <h3 style="margin-top:0;">1️⃣ What brings you in today?</h3>
-        <select id="bk-reason" name="reason" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
-          <option value="">Select reason</option>
-          <option>Emergency / Toothache</option>
-          <option>Cleaning / Check-up</option>
-          <option>Cosmetic</option>
-          <option>Exam / Consultation</option>
-        </select>
-
-        <h3>2️⃣ Preferred Practitioner</h3>
-        <select id="bk-doctor" name="doctor" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
-          <option value="">Select</option>
-          <option>Dr. Alex Booth</option>
-          <option>Dr. Maya Chen</option>
-          <option>Dr. Shaun Corbett</option>
-          <option>Any Available</option>
-        </select>
-
-        <h3>3️⃣ Date & Time</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
-          <input type="date" id="bk-date" name="date" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
-          <input type="time" id="bk-time" name="time" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
-        </div>
-
-        <h3>4️⃣ Your Information</h3>
-        <input id="bk-name" name="name" placeholder="Full Name" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:12px;font-size:1rem;">
-        <input id="bk-email" name="email" type="email" placeholder="Email Address" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:12px;font-size:1rem;">
-        <input id="bk-phone" name="phone" placeholder="Phone Number" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:16px;font-size:1rem;">
-        <select id="bk-type" name="patient_status" required style="width:100%;padding:12px;border:1px solid #e5e9f2;border-radius:10px;margin-bottom:20px;font-size:1rem;">
-          <option value="New">New Patient</option>
-          <option value="Existing">Existing Patient</option>
-        </select>
-
-        <button type="submit" class="btn primary" style="width:100%;justify-content:center">Confirm Appointment</button>
-      </form>
-    </div>
-  </div>
-</div>
-  
 </html>
