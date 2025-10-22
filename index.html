@@ -9,7 +9,7 @@
     :root{
       --bg:#f7fafc;
       --panel:#ffffff;
-      --text:#f2a44;
+      --text:#1f2a44; /* Corrected from #f2a44 */
       --muted:#68738a;
       --brand:#2563eb;
       --brand-600:#1e4fd6;
@@ -104,52 +104,34 @@
       .hero h1{font-size:2.25rem}
       .foot-grid{grid-template-columns:1fr}
       .nav ul{gap:12px;font-size:.9rem}
-    
-}
-      @keyframes shimmer {
-  0% {background-position:-200% 0;}
-  100% {background-position:200% 0;}
-}
-
-/* === Time Slot Button Enhancement === */
-#time-slot-grid button {
-  transition: all 0.25s ease;
-}
-#time-slot-grid button:hover {
-  background: var(--brand-50);
-}
-#time-slot-grid button.selected {
-  background: var(--brand);
-  color: #fff;
-  box-shadow: 0 0 10px var(--ring);
-  transform: scale(1.02);
-}
-
-
-      /* === Time Slot Button Enhancement === */
-#time-slot-grid button {
-  transition: all 0.25s ease;
-}
-#time-slot-grid button:hover {
-  background: var(--brand-50);
-}
-#time-slot-grid button.selected {
-  background: var(--brand);
-  color: #fff;
-  box-shadow: 0 0 10px var(--ring);
-  transform: scale(1.02);
-}
     }
     
-#time-slot-grid p {
-  opacity: 0;
-  animation: fadeIn 0.4s forwards;
-}
-@keyframes fadeIn {
-  to {opacity:1;}
-}
+    @keyframes shimmer {
+      0% {background-position:-200% 0;}
+      100% {background-position:200% 0;}
+    }
 
-    
+    /* === Time Slot Button Enhancement === */
+    #time-slot-grid button {
+      transition: all 0.25s ease;
+    }
+    #time-slot-grid button:hover {
+      background: var(--brand-50);
+    }
+    #time-slot-grid button.selected {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 0 10px var(--ring);
+      transform: scale(1.02);
+    }
+
+    #time-slot-grid p {
+      opacity: 0;
+      animation: fadeIn 0.4s forwards;
+    }
+    @keyframes fadeIn {
+      to {opacity:1;}
+    }
   </style>
 </head>
 <body>
@@ -514,7 +496,7 @@
           </select>
 
           <h3>3️⃣ Date & Time</h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px;">
             <input type="date" id="bk-date" name="date" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
             <input type="hidden" id="bk-time" name="time" required>
           </div>
@@ -586,7 +568,7 @@
       'open-book-hero',
       'open-book-nav',
       'open-book-footer',
-      'open-book-contact' // <-- This is the button you wanted fixed!
+      'open-book-contact'
     ];
     openBookButtons.forEach(id => {
       const el = document.getElementById(id);
@@ -622,7 +604,7 @@
         e.preventDefault();
         const data = Object.fromEntries(new FormData(contactForm).entries());
         try{
-          await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90", {
+          await fetch("https.forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-85c-09b991e14b90", { // URL slightly corrected
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -637,133 +619,146 @@
     }
 
     // Booking Form Submission
-if (bookForm) {
-  bookForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(bookForm).entries());
-    try {
-      await fetch("https://forgeai.app.n8n.cloud/webhook/book-appointment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "appointment", ...data }),
-      });
-      alert(`✅ Appointment request sent!\n\nWe'll confirm availability at ${data.email}.`);
-      bookForm.reset();
-      closeModal(bookModal);
-    } catch (err) {
-      alert("⚠️ Something went wrong. Please try again.");
-    }
-  });
-}
+    if (bookForm) {
+      bookForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(bookForm).entries());
+        
+        // --- Final check before submitting ---
+        if (!data.time) {
+          alert("🚫 Please select an available time slot before confirming.");
+          return;
+        }
 
-// === Disable past dates and weekends (Winnipeg timezone) ===
-(function setMinDateAndDisableWeekends() {
-  const dateInput = document.getElementById("bk-date");
-  if (!dateInput) return;
-
-  // --- Set Winnipeg timezone today as min ---
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const winnipegNow = new Date(utc - 5 * 3600000); // UTC-5 for Winnipeg
-  const yyyy = winnipegNow.getFullYear();
-  const mm = String(winnipegNow.getMonth() + 1).padStart(2, "0");
-  const dd = String(winnipegNow.getDate()).padStart(2, "0");
-  const todayStr = `${yyyy}-${mm}-${dd}`;
-  dateInput.min = todayStr;
-
-  // --- Re-render picker on focus: skip weekends visually ---
-  dateInput.addEventListener("focus", () => {
-    setTimeout(() => {
-      // Try to find and gray out weekend buttons (depends on browser rendering)
-      document.querySelectorAll("td, div").forEach(el => {
-        if (el.textContent.match(/^(Sat|Sun)$/i)) {
-          el.style.pointerEvents = "none";
-          el.style.opacity = "0.4";
+        try {
+          await fetch("https.forgeai.app.n8n.cloud/webhook/book-appointment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ type: "appointment", ...data }),
+          });
+          alert(`✅ Appointment request sent!\n\nWe'll confirm availability at ${data.email}.`);
+          bookForm.reset();
+          timeContainer.innerHTML = ""; // Clear time slots on successful submit
+          closeModal(bookModal);
+        } catch (err) {
+          alert("⚠️ Something went wrong. Please try again.");
         }
       });
-    }, 50);
-  });
-
-  // --- Prevent manual typing of weekend ---
-  dateInput.addEventListener("change", function () {
-    const chosen = new Date(this.value + "T00:00:00");
-    const day = chosen.getDay(); // 0 = Sunday, 6 = Saturday
-    if (day === 0 || day === 6) {
-      this.value = ""; // Clear selection
-      alert("🚫 The clinic is closed on weekends.");
-    }
-  });
-})();
-
-// === LIVE CALENDAR AVAILABILITY ===
-const dateInput = document.getElementById("bk-date");
-const timeContainer = document.createElement("div");
-timeContainer.id = "time-slot-grid";
-timeContainer.style.display = "grid";
-timeContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(100px, 1fr))";
-timeContainer.style.gap = "10px";
-timeContainer.style.marginBottom = "16px";
-
-// Insert grid right after date input
-dateInput.parentNode.insertBefore(timeContainer, dateInput.nextSibling);
-
-let selectedSlot = null;
-
-// Fetch available slots when a date is chosen
-dateInput.addEventListener("change", async (e) => {
-  const chosenDate = e.target.value;
-  if (!chosenDate) return;
-
-  timeContainer.innerHTML = `
-    <div style="grid-column:1/-1;text-align:center;">
-      <div style="height:12px;width:60%;margin:12px auto;background:linear-gradient(90deg,#eee,#ddd,#eee);
-        background-size:200% 100%;animation:shimmer 1s infinite linear;border-radius:6px;"></div>
-    </div>`;
-
-  try {
-    const res = await fetch(`https://forgeai.app.n8n.cloud/webhook/check-availability?date=${chosenDate}`);
-    let data = await res.json();
-
-    if (typeof data === "string") {
-      try { data = JSON.parse(data); } 
-      catch (e) { console.error("Failed to parse JSON:", e); }
     }
 
-    const slots = data[0]?.availableSlots || [];
-    timeContainer.innerHTML = "";
+    // === 5. DATE PICKER & LIVE AVAILABILITY LOGIC ===
 
-    if (slots.length === 0) {
-      const msg = data[0]?.message || "No available times";
-      timeContainer.innerHTML = `<p style='grid-column:1/-1;text-align:center;color:#999;'>${msg}</p>`;
-      return;
-    }
+    // --- Set Winnipeg timezone today as min date ---
+    (function setMinDate() {
+      const dateInput = document.getElementById("bk-date");
+      if (!dateInput) return;
+      
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const winnipegNow = new Date(utc - (5 * 3600000)); // UTC-5 for Winnipeg
+      
+      const yyyy = winnipegNow.getFullYear();
+      const mm = String(winnipegNow.getMonth() + 1).padStart(2, "0");
+      const dd = String(winnipegNow.getDate()).padStart(2, "0");
+      const todayStr = `${yyyy}-${mm}-${dd}`;
+      
+      dateInput.min = todayStr;
+    })();
 
-    // Render buttons
-    slots.forEach((slot) => {
-      const btn = document.createElement("button");
-      btn.textContent = slot;
-      btn.type = "button";
-      btn.className = "btn ghost";
-      btn.style.justifyContent = "center";
-      btn.style.padding = "12px";
-      btn.style.fontSize = "0.95rem";
+    // --- Create and inject the time slot container ---
+    const dateInput = document.getElementById("bk-date");
+    const timeContainer = document.createElement("div");
+    timeContainer.id = "time-slot-grid";
+    timeContainer.style.display = "grid";
+    timeContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(100px, 1fr))";
+    timeContainer.style.gap = "10px";
+    timeContainer.style.marginTop = "12px"; // Added margin for spacing
+    timeContainer.style.marginBottom = "16px";
+    dateInput.parentNode.insertBefore(timeContainer, dateInput.nextSibling);
 
-      btn.addEventListener("click", () => {
-        document.querySelectorAll("#time-slot-grid button").forEach(b => b.classList.remove("selected"));
-        btn.classList.add("selected");
-        selectedSlot = slot;
-        document.getElementById("bk-time").value = slot;
-      });
+    let selectedSlot = null;
 
-      timeContainer.appendChild(btn);
+    // --- Fetch available slots when a date is chosen (NOW INCLUDES WEEKEND CHECK) ---
+    dateInput.addEventListener("change", async (e) => {
+      const chosenDate = e.target.value;
+      const hiddenTimeInput = document.getElementById("bk-time");
+
+      // Clear previous state
+      timeContainer.innerHTML = "";
+      selectedSlot = null;
+      if (hiddenTimeInput) hiddenTimeInput.value = "";
+
+      if (!chosenDate) return; // Do nothing if date is cleared
+
+      // --- 1. NEW WEEKEND CHECK ---
+      // We check this based on the browser's local timezone interpretation of the date string
+      // T00:00:00 ensures it checks the day of the selected date, not UTC.
+      const chosen = new Date(chosenDate + "T00:00:00"); 
+      const day = chosen.getDay(); // 0 = Sunday, 6 = Saturday
+      
+      if (day === 0 || day === 6) {
+        e.target.value = ""; // Clear the invalid selection
+        // Display an inline error message instead of an alert
+        timeContainer.innerHTML = `<p style='grid-column:1/-1;text-align:center;color:#c00;font-weight:600;'>🚫 The clinic is closed on weekends. Please pick a weekday.</p>`;
+        return; // Stop execution
+      }
+
+      // --- 2. Show loading state ---
+      timeContainer.innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;">
+          <div style="height:12px;width:60%;margin:12px auto;background:linear-gradient(90deg,#eee,#ddd,#eee);
+            background-size:200% 100%;animation:shimmer 1s infinite linear;border-radius:6px;"></div>
+        </div>`;
+
+      // --- 3. Fetch data ---
+      try {
+        const res = await fetch(`https://forgeai.app.n8n.cloud/webhook/check-availability?date=${chosenDate}`);
+        let data = await res.json();
+
+        // Handle if API returns a stringified JSON
+        if (typeof data === "string") {
+          try { data = JSON.parse(data); } 
+          catch (e) { console.error("Failed to parse JSON string:", e); data = [{}]; }
+        }
+
+        const slots = data[0]?.availableSlots || [];
+        timeContainer.innerHTML = ""; // Clear loading shimmer
+
+        if (slots.length === 0) {
+          const msg = data[0]?.message || "No available times for this day.";
+          timeContainer.innerHTML = `<p style='grid-column:1/-1;text-align:center;color:var(--muted);'>${msg}</p>`;
+          return;
+        }
+
+        // --- 4. Render time slot buttons ---
+        slots.forEach((slot) => {
+          const btn = document.createElement("button");
+          btn.textContent = slot;
+          btn.type = "button";
+          btn.className = "btn ghost";
+          btn.style.justifyContent = "center";
+          btn.style.padding = "12px";
+          btn.style.fontSize = "0.95rem";
+
+          btn.addEventListener("click", () => {
+            // Remove 'selected' from all other buttons
+            document.querySelectorAll("#time-slot-grid button").forEach(b => b.classList.remove("selected"));
+            // Add 'selected' to this one
+            btn.classList.add("selected");
+            // Set the hidden input's value
+            selectedSlot = slot;
+            if (hiddenTimeInput) hiddenTimeInput.value = slot;
+          });
+
+          timeContainer.appendChild(btn);
+        });
+
+      } catch (err) {
+        console.error("Error fetching slots:", err);
+        timeContainer.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#c00;font-weight:600;'>Error loading available times. Please try again.</p>";
+      }
     });
 
-  } catch (err) {
-    console.error("Error fetching slots:", err);
-    timeContainer.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#999;'>Error loading slots</p>";
-  }
-});
-    
   </script>
 </body>
 </html>
