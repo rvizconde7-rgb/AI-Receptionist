@@ -104,7 +104,52 @@
       .hero h1{font-size:2.25rem}
       .foot-grid{grid-template-columns:1fr}
       .nav ul{gap:12px;font-size:.9rem}
+    
+}
+      @keyframes shimmer {
+  0% {background-position:-200% 0;}
+  100% {background-position:200% 0;}
+}
+
+/* === Time Slot Button Enhancement === */
+#time-slot-grid button {
+  transition: all 0.25s ease;
+}
+#time-slot-grid button:hover {
+  background: var(--brand-50);
+}
+#time-slot-grid button.selected {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 0 10px var(--ring);
+  transform: scale(1.02);
+}
+
+
+      /* === Time Slot Button Enhancement === */
+#time-slot-grid button {
+  transition: all 0.25s ease;
+}
+#time-slot-grid button:hover {
+  background: var(--brand-50);
+}
+#time-slot-grid button.selected {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 0 10px var(--ring);
+  transform: scale(1.02);
+}
     }
+    
+#time-slot-grid p {
+  opacity: 0;
+  animation: fadeIn 0.4s forwards;
+}
+@keyframes fadeIn {
+  to {opacity:1;}
+}
+
+    
   </style>
 </head>
 <body>
@@ -471,7 +516,7 @@
           <h3>3️⃣ Date & Time</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
             <input type="date" id="bk-date" name="date" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
-            <input type="time" id="bk-time" name="time" required style="padding:12px;border:1px solid #e5e9f2;border-radius:10px;font-size:1rem;">
+            <input type="hidden" id="bk-time" name="time" required>
           </div>
 
           <h3>4️⃣ Your Information</h3>
@@ -610,7 +655,75 @@
         }
       });
     }
+    
+// === LIVE CALENDAR AVAILABILITY ===
 
+// 1. Select date and time slot containers
+const dateInput = document.getElementById("bk-date");
+const timeContainer = document.createElement("div");
+timeContainer.id = "time-slot-grid";
+timeContainer.style.display = "grid";
+timeContainer.style.gridTemplateColumns = "repeat(auto-fit, minmax(100px, 1fr))";
+timeContainer.style.gap = "10px";
+timeContainer.style.marginBottom = "16px";
+
+// Insert grid right after date input
+dateInput.parentNode.insertBefore(timeContainer, dateInput.nextSibling);
+
+let selectedSlot = null;
+
+// 2. Fetch available slots when a date is chosen
+dateInput.addEventListener("change", async (e) => {
+  const chosenDate = e.target.value;
+  if (!chosenDate) return;
+
+timeContainer.innerHTML = `
+  <div style="grid-column:1/-1;text-align:center;">
+    <div style="height:12px;width:60%;margin:12px auto;background:linear-gradient(90deg,#eee,#ddd,#eee);
+      background-size:200% 100%;animation:shimmer 1s infinite linear;border-radius:6px;"></div>
+  </div>`;
+
+  try {
+    const res = await fetch(`https://forgeai.app.n8n.cloud/webhook/check-availability?date=${chosenDate}`);
+    const data = await res.json();
+    const slots = data[0]?.availableSlots || [];
+
+    timeContainer.innerHTML = "";
+
+    if (slots.length === 0) {
+      timeContainer.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#999;'>No available times</p>";
+      return;
+    }
+
+    // 3. Render available slot buttons
+    slots.forEach((slot) => {
+  const btn = document.createElement("button");
+  btn.textContent = slot;
+  btn.type = "button";
+  btn.className = "btn ghost";
+  btn.style.justifyContent = "center";
+  btn.style.padding = "12px";
+  btn.style.fontSize = "0.95rem";
+
+  btn.addEventListener("click", () => {
+    // Deselect previous
+    document.querySelectorAll("#time-slot-grid button").forEach(b => b.classList.remove("selected"));
+    // Highlight this one
+    btn.classList.add("selected");
+    selectedSlot = slot;
+    document.getElementById("bk-time").value = slot;
+  });
+
+  // Append button to grid
+  timeContainer.appendChild(btn);
+});
+
+  } catch (err) {
+    console.error("Error fetching slots:", err);
+    timeContainer.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#999;'>Error loading slots</p>";
+  }
+});
+    
   </script>
 </body>
 </html>
