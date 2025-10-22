@@ -654,7 +654,32 @@
           alert("⚠️ Something went wrong. Please try again.");
         }
       });
+
+// === Block past dates and weekends (Winnipeg timezone) ===
+(function setMinDateAndBlockWeekends() {
+  const dateInput = document.getElementById("bk-date");
+  if (!dateInput) return;
+
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  const winnipegNow = new Date(utc - 5 * 3600000); // UTC-5 Winnipeg
+  const yyyy = winnipegNow.getFullYear();
+  const mm = String(winnipegNow.getMonth() + 1).padStart(2, "0");
+  const dd = String(winnipegNow.getDate()).padStart(2, "0");
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+  dateInput.min = todayStr;
+
+  // Listen for date changes
+  dateInput.addEventListener("input", function () {
+    const chosen = new Date(this.value + "T00:00:00");
+    const day = chosen.getDay(); // 0 = Sunday, 6 = Saturday
+    if (day === 0 || day === 6) {
+      alert("🚫 Sorry! The clinic is closed on weekends.");
+      this.value = ""; // clear invalid date
     }
+  });
+})();
+
     
 // === LIVE CALENDAR AVAILABILITY ===
 
