@@ -637,23 +637,24 @@
     }
 
     // Booking Form Submission
-    if(bookForm) {
-      bookForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(bookForm).entries());
-        try {
-          await fetch("https://forgeai.app.n8n.cloud/webhook/book-appointment", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ type: "appointment", ...data })
-});
-          alert(`✅ Appointment request sent!\n\nWe'll confirm availability at ${data.email}.`);
-          bookForm.reset();
-          closeModal(bookModal);
-        } catch (err) {
-          alert("⚠️ Something went wrong. Please try again.");
-        }
+if (bookForm) {
+  bookForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(bookForm).entries());
+    try {
+      await fetch("https://forgeai.app.n8n.cloud/webhook/book-appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "appointment", ...data }),
       });
+      alert(`✅ Appointment request sent!\n\nWe'll confirm availability at ${data.email}.`);
+      bookForm.reset();
+      closeModal(bookModal);
+    } catch (err) {
+      alert("⚠️ Something went wrong. Please try again.");
+    }
+  });
+}
 
 // === Block past dates and weekends (Winnipeg timezone) ===
 (function setMinDateAndBlockWeekends() {
@@ -669,7 +670,7 @@
   const todayStr = `${yyyy}-${mm}-${dd}`;
   dateInput.min = todayStr;
 
-  // Listen for date changes
+  // Block weekends
   dateInput.addEventListener("input", function () {
     const chosen = new Date(this.value + "T00:00:00");
     const day = chosen.getDay(); // 0 = Sunday, 6 = Saturday
@@ -680,24 +681,8 @@
   });
 })();
 
-    
 // === LIVE CALENDAR AVAILABILITY ===
-
-// === 1. Select date and time slot containers ===
 const dateInput = document.getElementById("bk-date");
-
-// === Block past dates (Winnipeg timezone) ===
-(function setMinDateForBooking() {
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const winnipegNow = new Date(utc - 5 * 3600000); // UTC-5 for Winnipeg
-  const yyyy = winnipegNow.getFullYear();
-  const mm = String(winnipegNow.getMonth() + 1).padStart(2, "0");
-  const dd = String(winnipegNow.getDate()).padStart(2, "0");
-  const todayStr = `${yyyy}-${mm}-${dd}`;
-  dateInput.min = todayStr; // disable dates before today
-})();
-
 const timeContainer = document.createElement("div");
 timeContainer.id = "time-slot-grid";
 timeContainer.style.display = "grid";
@@ -710,61 +695,54 @@ dateInput.parentNode.insertBefore(timeContainer, dateInput.nextSibling);
 
 let selectedSlot = null;
 
-// 2. Fetch available slots when a date is chosen
+// Fetch available slots when a date is chosen
 dateInput.addEventListener("change", async (e) => {
   const chosenDate = e.target.value;
   if (!chosenDate) return;
 
-timeContainer.innerHTML = `
-  <div style="grid-column:1/-1;text-align:center;">
-    <div style="height:12px;width:60%;margin:12px auto;background:linear-gradient(90deg,#eee,#ddd,#eee);
-      background-size:200% 100%;animation:shimmer 1s infinite linear;border-radius:6px;"></div>
-  </div>`;
+  timeContainer.innerHTML = `
+    <div style="grid-column:1/-1;text-align:center;">
+      <div style="height:12px;width:60%;margin:12px auto;background:linear-gradient(90deg,#eee,#ddd,#eee);
+        background-size:200% 100%;animation:shimmer 1s infinite linear;border-radius:6px;"></div>
+    </div>`;
 
   try {
     const res = await fetch(`https://forgeai.app.n8n.cloud/webhook/check-availability?date=${chosenDate}`);
-let data = await res.json();
+    let data = await res.json();
 
-// Handle if n8n returned a stringified JSON
-if (typeof data === "string") {
-  try {
-    data = JSON.parse(data);
-  } catch (e) {
-    console.error("Failed to parse JSON:", e);
-  }
-}
+    if (typeof data === "string") {
+      try { data = JSON.parse(data); } 
+      catch (e) { console.error("Failed to parse JSON:", e); }
+    }
 
-const slots = data[0]?.availableSlots || [];
-
+    const slots = data[0]?.availableSlots || [];
     timeContainer.innerHTML = "";
 
     if (slots.length === 0) {
-      timeContainer.innerHTML = "<p style='grid-column:1/-1;text-align:center;color:#999;'>No available times</p>";
+      const msg = data[0]?.message || "No available times";
+      timeContainer.innerHTML = `<p style='grid-column:1/-1;text-align:center;color:#999;'>${msg}</p>`;
       return;
     }
 
-    // 3. Render available slot buttons
+    // Render buttons
     slots.forEach((slot) => {
-  const btn = document.createElement("button");
-  btn.textContent = slot;
-  btn.type = "button";
-  btn.className = "btn ghost";
-  btn.style.justifyContent = "center";
-  btn.style.padding = "12px";
-  btn.style.fontSize = "0.95rem";
+      const btn = document.createElement("button");
+      btn.textContent = slot;
+      btn.type = "button";
+      btn.className = "btn ghost";
+      btn.style.justifyContent = "center";
+      btn.style.padding = "12px";
+      btn.style.fontSize = "0.95rem";
 
-  btn.addEventListener("click", () => {
-    // Deselect previous
-    document.querySelectorAll("#time-slot-grid button").forEach(b => b.classList.remove("selected"));
-    // Highlight this one
-    btn.classList.add("selected");
-    selectedSlot = slot;
-    document.getElementById("bk-time").value = slot;
-  });
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#time-slot-grid button").forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedSlot = slot;
+        document.getElementById("bk-time").value = slot;
+      });
 
-  // Append button to grid
-  timeContainer.appendChild(btn);
-});
+      timeContainer.appendChild(btn);
+    });
 
   } catch (err) {
     console.error("Error fetching slots:", err);
