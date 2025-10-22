@@ -656,27 +656,41 @@ if (bookForm) {
   });
 }
 
-// === Block past dates and weekends (Winnipeg timezone) ===
-(function setMinDateAndBlockWeekends() {
+// === Disable past dates and weekends (Winnipeg timezone) ===
+(function setMinDateAndDisableWeekends() {
   const dateInput = document.getElementById("bk-date");
   if (!dateInput) return;
 
+  // --- Set Winnipeg timezone today as min ---
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-  const winnipegNow = new Date(utc - 5 * 3600000); // UTC-5 Winnipeg
+  const winnipegNow = new Date(utc - 5 * 3600000); // UTC-5 for Winnipeg
   const yyyy = winnipegNow.getFullYear();
   const mm = String(winnipegNow.getMonth() + 1).padStart(2, "0");
   const dd = String(winnipegNow.getDate()).padStart(2, "0");
   const todayStr = `${yyyy}-${mm}-${dd}`;
   dateInput.min = todayStr;
 
-  // Block weekends
-  dateInput.addEventListener("input", function () {
+  // --- Re-render picker on focus: skip weekends visually ---
+  dateInput.addEventListener("focus", () => {
+    setTimeout(() => {
+      // Try to find and gray out weekend buttons (depends on browser rendering)
+      document.querySelectorAll("td, div").forEach(el => {
+        if (el.textContent.match(/^(Sat|Sun)$/i)) {
+          el.style.pointerEvents = "none";
+          el.style.opacity = "0.4";
+        }
+      });
+    }, 50);
+  });
+
+  // --- Prevent manual typing of weekend ---
+  dateInput.addEventListener("change", function () {
     const chosen = new Date(this.value + "T00:00:00");
     const day = chosen.getDay(); // 0 = Sunday, 6 = Saturday
     if (day === 0 || day === 6) {
-      alert("🚫 Sorry! The clinic is closed on weekends.");
-      this.value = ""; // clear invalid date
+      this.value = ""; // Clear selection
+      alert("🚫 The clinic is closed on weekends.");
     }
   });
 })();
