@@ -685,8 +685,18 @@ timeContainer.innerHTML = `
 
   try {
     const res = await fetch(`https://forgeai.app.n8n.cloud/webhook/check-availability?date=${chosenDate}`);
-    const data = await res.json();
-    const slots = data[0]?.availableSlots || [];
+let data = await res.json();
+
+// Handle if n8n returned a stringified JSON
+if (typeof data === "string") {
+  try {
+    data = JSON.parse(data);
+  } catch (e) {
+    console.error("Failed to parse JSON:", e);
+  }
+}
+
+const slots = data[0]?.availableSlots || [];
 
     timeContainer.innerHTML = "";
 
