@@ -642,11 +642,11 @@
         e.preventDefault();
         const data = Object.fromEntries(new FormData(bookForm).entries());
         try {
-          await fetch("https://forgeai.app.n8n.cloud/webhook/8fd8822d-f278-4821-857c-09b991e14b90", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ type: "appointment", ...data })
-          });
+          await fetch("https://forgeai.app.n8n.cloud/webhook/book-appointment", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ type: "appointment", ...data })
+});
           alert(`✅ Appointment request sent!\n\nWe'll confirm availability at ${data.email}.`);
           bookForm.reset();
           closeModal(bookModal);
